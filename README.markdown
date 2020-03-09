@@ -76,7 +76,7 @@ That summarizes information for the package. File keeps list of modules, and tot
 for module and total time for each phase. If you import `<package-version>.csv` file to some
 package that works with tables like numbers, you'll see something like this:
 
-![screen1](https://github.com/qnikst/ghc-timing-report/screenshot1.png)
+![screen1](https://github.com/qnikst/ghc-timings-report/blob/master/screenshot1.png?raw=true)
 
 
 # Project ideology.
