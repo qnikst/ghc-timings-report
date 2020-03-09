@@ -29,7 +29,7 @@ import GhcFile
 import GHC.Exts
 import qualified Data.Vector as V
 import Report
-import System.Directory(copyFile)
+import System.Directory(copyFile, createDirectoryIfMissing)
 import System.Environment
 import System.FilePath
 import TextShow
@@ -41,6 +41,7 @@ import qualified Prelude
 main :: IO ()
 main = do
   [dir] <- getArgs
+  createDirectoryIfMissing True "./tmp"
 
   files <- findDumpTimings dir
 
@@ -57,6 +58,7 @@ main = do
     Prelude.putStrLn "Warning, some files are failed to be parsed"
     Prelude.print files_failed
 
+  
   -- Output all files in json form for later analysis.
   results <- for files_parsed $ \f -> do
     steps <- fmap parsePhases $ T.readFile (rebuildFilePath dir f)
