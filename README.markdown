@@ -55,6 +55,11 @@ In the `tmp` folder you'll get all the reports.
 (Note this section will likely always be outdated despite all efforts to keep it up to date,
 sorry for that)
 
+Root of the report files is file:
+
+`index.html` that contains links to html file files with summary report for each individual
+package. There are other files as well:
+
 Report that are generated keeps a ton of -garbage- useful data for each module in all the
 projects you'll see files:
 

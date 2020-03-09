@@ -5,6 +5,7 @@ import Control.Monad
 import Control.Monad.Trans.Resource
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.Binary.Builder as Builder
+import qualified Data.ByteString as B
 import Data.Conduit
 import Data.Conduit.Combinators as CL
 import Data.Conduit.List
@@ -18,6 +19,7 @@ import Data.Traversable
 import qualified Data.Map as Map
 import qualified Data.Text.Encoding as T
 import qualified Data.Text.IO as T
+import qualified Data.Text as T
 import Data.Aeson
 import Data.Either
 import Data.List
@@ -26,8 +28,13 @@ import GhcBuildPhase
 import GhcFile
 import GHC.Exts
 import qualified Data.Vector as V
+import Report
+import System.Directory(copyFile)
 import System.Environment
 import System.FilePath
+import TextShow
+import Text.Blaze (Markup)
+import Text.Blaze.Renderer.Utf8 (renderMarkupToByteStringIO)
 import Prelude hiding (mapM_, print)
 import qualified Prelude
 
@@ -65,27 +72,35 @@ main = do
   encodeFile (output </> "stats_by_package" <.> "json") stats_by_package
   for_ (Map.toList stats_by_package) $ \(package, stat) -> do
     let headers = Set.toList $ Set.fromList 
-           [ T.encodeUtf8 phaseName
+           [ phaseName
            | (_, steps) <- Map.toList stat
            , Phase{..} <- steps
            ]
-    let bs = Csv.encodeHeader (V.fromList ("module": "total": headers))
-             <> mconcat
-                [ Csv.encodeRecord
-                $ module_name
-                : show total
-                : Prelude.map (\n -> maybe "" show $ Map.lookup n by_phase) headers
-                | (module_name, steps) <- Map.toList stat
-                , let total = Prelude.sum [phaseTime | Phase{..} <- steps]
-                , let by_phase =  Map.fromListWith (+) 
-                                    [(T.encodeUtf8 phaseName, phaseTime)
+    let rows = [ ( T.pack module_name
+                 , total
+                 , Prelude.map (\n -> Map.lookup n by_phase) headers)
+               | (module_name, steps) <- Map.toList stat
+               , let total = Prelude.sum [phaseTime | Phase{..} <- steps]
+               , let by_phase =  Map.fromListWith (+) 
+                                    [ (phaseName, phaseTime)
                                     | Phase{..} <- steps
                                     ]
-                , then sortWith by (Down total)
-                ]
+               , then sortWith by (Down total)
+               ]
+    mkHtmlFile ("./tmp/" <> package <> ".html")
+      $ Report.packageTable package headers rows
+    let bs = Csv.encodeHeader (V.fromList ("module": "total": Prelude.map T.encodeUtf8 headers))
+             <> mconcat (Prelude.map Csv.encodeRecord 
+               [ Prelude.map T.encodeUtf8 $ module_name:(showt total):Prelude.map showt cols
+               | (module_name, total, cols) <- rows
+               ])
     BSL.writeFile (output </> package <.> "csv")
        $ Builder.toLazyByteString bs
   -- Prelude.print byPackage
+  -- Report.
+  mkHtmlFile "./tmp/index.html"
+    $ Report.index $ Map.keys stats_by_package
+  copyFile "files/main.css" "./tmp/main.css" -- TODO use data files
   where
     output = "./tmp"
 
@@ -99,3 +114,10 @@ findDumpTimings input = do
     .| consume
   where
     endsWith x y = (reverse y) `isPrefixOf` (reverse x)
+
+mkHtmlFile :: FilePath -> Markup -> IO ()
+mkHtmlFile fn markup = do
+  B.writeFile fn "" -- TODO: properly cleanup the file
+  renderMarkupToByteStringIO 
+    (B.appendFile fn) -- TODO: keep handle opened instead of reopening each time.
+    markup
