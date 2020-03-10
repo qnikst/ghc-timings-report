@@ -65,23 +65,26 @@ main = do
     encodeFile (output </> rebuildPlainPath f <.> "json") steps
     let bs = encodeDefaultOrderedByName steps
     BSL.writeFile (output </> rebuildPlainPath f <.> "csv") bs
+    mkHtmlFile (output </> rebuildPlainPath f <.> "html")
+      $ Report.moduleTable f steps
     pure (f, steps)
 
   let stats_by_package = Map.fromListWith (<>)
-        [ (packageName, Map.singleton (joinPath modulePath) steps)
+        [ (packageName, Map.singleton GhcFile{..} steps)
         | (GhcFile{..}, steps) <- results
         ]
-  encodeFile (output </> "stats_by_package" <.> "json") stats_by_package
+  -- FIXME: put this file back later
+  -- encodeFile (output </> "stats_by_package" <.> "json") stats_by_package
   for_ (Map.toList stats_by_package) $ \(package, stat) -> do
     let headers = Set.toList $ Set.fromList 
            [ phaseName
            | (_, steps) <- Map.toList stat
            , Phase{..} <- steps
            ]
-    let rows = [ ( T.pack module_name
+    let rows = [ ( GhcFile{..}
                  , total
                  , Prelude.map (\n -> Map.lookup n by_phase) headers)
-               | (module_name, steps) <- Map.toList stat
+               | (GhcFile{..}, steps) <- Map.toList stat
                , let total = Prelude.sum [phaseTime | Phase{..} <- steps]
                , let by_phase =  Map.fromListWith (+) 
                                     [ (phaseName, phaseTime)
@@ -93,8 +96,8 @@ main = do
       $ Report.packageTable package headers rows
     let bs = Csv.encodeHeader (V.fromList ("module": "total": Prelude.map T.encodeUtf8 headers))
              <> mconcat (Prelude.map Csv.encodeRecord 
-               [ Prelude.map T.encodeUtf8 $ module_name:(showt total):Prelude.map showt cols
-               | (module_name, total, cols) <- rows
+               [ Prelude.map T.encodeUtf8 $ T.pack (joinPath modulePath):(showt total):Prelude.map showt cols
+               | (GhcFile{..}, total, cols) <- rows
                ])
     BSL.writeFile (output </> package <.> "csv")
        $ Builder.toLazyByteString bs

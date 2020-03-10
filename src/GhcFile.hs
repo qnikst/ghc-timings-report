@@ -21,6 +21,7 @@ data GhcFile = GhcFile
   , modulePath :: [String]
   }
   deriving (Show, Generic)
+  deriving (Eq, Ord)
   deriving anyclass (ToJSON, FromJSON)
 
 -- | Build path to the file in the file system based on prefix and 'GhcFile'
