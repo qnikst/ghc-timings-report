@@ -17,6 +17,7 @@ import qualified Text.Blaze.Html5 as H
 import Text.Blaze.Html5.Attributes hiding (title, rows, accept)
 import qualified Text.Blaze.Html5.Attributes as A
 import System.FilePath
+import Prelude hiding (span)
 
 index :: [String] -> Markup -- TODO: use T.Text
 index packages = docTypeHtml $ do
@@ -44,8 +45,8 @@ packageTable package_name columns rows = docTypeHtml $ do
            ! A.href "./main.css"
   body $ do
     h1 $ fromString package_name
-    a ! href "./index.html"
-      $ "< back"
+    p $ do 
+      a ! href "./index.html" $ "index"
     table $ do
       tbody $ do
         tr $ do
@@ -77,16 +78,18 @@ moduleTable GhcFile{..} rows = docTypeHtml $ do
   body $ do
     h1 $ toMarkup $ packageName <> ": " <> (intercalate "." modulePath)
     p $ do
-      a ! href "./index.html" $ "< index"
-      a ! href (fromString $ "./" <> packageName <> ".html") $ toMarkup $ "< " <> packageName
+      a ! href "./index.html" $ "index"
+      H.span " < "
+      a ! href (fromString $ "./" <> packageName <> ".html") $ toMarkup packageName
     table $ do
       tbody $ do
         tr $ do
-          th "Phase name"
+          th ! colspan "2" $ "Phase name"
           th "Alloc"
           th "Time"
-        for_ rows $ \Phase{..} ->
+        for_ (zip [1..] rows) $ \(n, Phase{..}) ->
           tr $ do 
+            td ! A.class_ "module" ! A.style "width:5%" $ toMarkup (n :: Int)
             td ! A.class_ "module" $ toMarkup phaseName
             td ! A.class_ "number" $ toMarkup phaseAlloc
             (td `lev` phaseTime ! A.class_ "number") $ toMarkup $ formatRealFloat Fixed (Just 2) phaseTime
