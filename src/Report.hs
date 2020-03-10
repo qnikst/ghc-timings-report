@@ -47,6 +47,9 @@ packageTable package_name columns rows = docTypeHtml $ do
     h1 $ fromString package_name
     p $ do 
       a ! href "./index.html" $ "index"
+    p $ do
+      a ! href (fromString $ package_name <> ".csv")
+        $ "Download as CSV"
     table $ do
       tbody $ do
         tr $ do
@@ -69,7 +72,7 @@ packageTable package_name columns rows = docTypeHtml $ do
             | otherwise = t
     
 moduleTable :: GhcFile -> [Phase] -> Markup
-moduleTable GhcFile{..} rows = docTypeHtml $ do
+moduleTable f@GhcFile{..} rows = docTypeHtml $ do
   H.head $ do
     title $ toMarkup $ "GHC timings report: " <> packageName <> ": " <> (intercalate "." modulePath)
     H.link ! A.rel "stylesheet"
@@ -81,6 +84,9 @@ moduleTable GhcFile{..} rows = docTypeHtml $ do
       a ! href "./index.html" $ "index"
       H.span " < "
       a ! href (fromString $ "./" <> packageName <> ".html") $ toMarkup packageName
+    p $ do 
+      a ! href (fromString $ rebuildPlainPath f <> ".csv")
+        $ "Download as CSV"
     table $ do
       tbody $ do
         tr $ do
