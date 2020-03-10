@@ -116,4 +116,5 @@ that in statistics reports.
 2. I've tried to build a table where I output all the phases, but such a table bacame too
 big so "Numbers" that I was using for working with data refused to work with it. So I've
 abadonned that idea unless I'll find a way to represent data in a compact way.
-
+3. `-ddump-json` doesn't affect `-ddump-timings` to it still required to use custom format
+parser instead of nice json one.
