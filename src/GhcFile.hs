@@ -18,6 +18,8 @@ data GhcFile = GhcFile
   { hostOs :: String -- ^ Host
   , ghcVersion :: String
   , packageName :: String
+  , componentType :: String
+  , subComponent :: String
   , modulePath :: [String]
   }
   deriving (Show, Generic)
@@ -29,7 +31,7 @@ data GhcFile = GhcFile
 -- It looks terrible, seems a wrong abstraction is here.
 rebuildFilePath :: FilePath -> GhcFile -> FilePath
 rebuildFilePath base GhcFile{..} =
-  base </> "build" </> hostOs </> ghcVersion </> packageName </> "build" </> joinPath modulePath
+  base </> "build" </> hostOs </> ghcVersion </> packageName </> componentType </> subComponent </> "build" </> joinPath modulePath
 
 -- | Convert 'GhcFile' into plain filename that we use in our report storage.
 rebuildPlainPath :: GhcFile -> FilePath
