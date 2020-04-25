@@ -20,7 +20,7 @@ apply any merge requests that will make live of other users easier.
 1. Download the tool:
 
 ```haskell
-hub clone https://github.com/qnikst/ghc-timing-report
+hub clone https://github.com/qnikst/ghc-timings-report
 ```
 
 2. Build it:
