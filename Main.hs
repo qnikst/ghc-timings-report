@@ -51,7 +51,7 @@ main = do
             case stripPrefix dir file of
               Nothing -> Left file
               Just x -> case splitDirectories x of
-                ("/": "build": hostOs: ghcVersion: packageName: "build": modulePath) -> Right GhcFile{..}
+                ("/" : "build" : hostOs : ghcVersion : packageName : componentType : subComponent : "build" : modulePath) -> Right GhcFile{..}
                 _ -> Left file
 
   unless (Prelude.null files_failed) $ do
