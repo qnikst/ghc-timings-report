@@ -1,0 +1,27 @@
+phaseName,phaseModule,phaseAlloc,phaseTime
+Parser ,Text.Packrat.Parse,14299200,4.858
+Renamer/typechecker ,Text.Packrat.Parse,45798536,42.884
+Desugar ,Text.Packrat.Parse,9181512,12.886
+Simplifier ,Text.Packrat.Parse,77088552,70.537
+Specialise ,Text.Packrat.Parse,2579824,1.389
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = False}) ",Text.Packrat.Parse,14875576,13.2
+Simplifier ,Text.Packrat.Parse,68316064,65.436
+Simplifier ,Text.Packrat.Parse,46242792,44.129
+Simplifier ,Text.Packrat.Parse,28279856,30.455
+Float inwards ,Text.Packrat.Parse,18744,1.6e-2
+Called arity analysis ,Text.Packrat.Parse,20304,1.7e-2
+Simplifier ,Text.Packrat.Parse,36764840,32.017
+Demand analysis ,Text.Packrat.Parse,13729352,9.039
+Worker Wrapper binds ,Text.Packrat.Parse,770528,0.732
+Simplifier ,Text.Packrat.Parse,131443704,135.411
+Exitification transformation ,Text.Packrat.Parse,21264,1.0e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = True}) ",Text.Packrat.Parse,31390992,28.685
+Common sub-expression ,Text.Packrat.Parse,19848,1.0e-2
+Float inwards ,Text.Packrat.Parse,18744,7.0e-3
+Simplifier ,Text.Packrat.Parse,74263336,144.986
+Demand analysis ,Text.Packrat.Parse,32248584,22.458
+CoreTidy ,Text.Packrat.Parse,12560576,7.708
+CorePrep ,Text.Packrat.Parse,19736,1.9e-2
+CodeGen ,Text.Packrat.Parse,414714128,275.896
+CorePrep ,Text.Packrat.Parse,19736,2.8e-2
+CodeGen ,Text.Packrat.Parse,419411752,234.973

@@ -1,0 +1,27 @@
+phaseName,phaseModule,phaseAlloc,phaseTime
+Parser ,Network.HaskellNet.SMTP,6476904,2.422
+Renamer/typechecker ,Network.HaskellNet.SMTP,11208352,10.957
+Desugar ,Network.HaskellNet.SMTP,1318200,1.645
+Simplifier ,Network.HaskellNet.SMTP,18345144,25.428
+Specialise ,Network.HaskellNet.SMTP,866072,0.726
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = False}) ",Network.HaskellNet.SMTP,4004408,4.473
+Simplifier ,Network.HaskellNet.SMTP,23151352,30.247
+Simplifier ,Network.HaskellNet.SMTP,16340760,19.079
+Simplifier ,Network.HaskellNet.SMTP,24550824,27.678
+Float inwards ,Network.HaskellNet.SMTP,20248,3.4e-2
+Called arity analysis ,Network.HaskellNet.SMTP,21808,2.1e-2
+Simplifier ,Network.HaskellNet.SMTP,13734544,16.245
+Demand analysis ,Network.HaskellNet.SMTP,8540576,5.751
+Worker Wrapper binds ,Network.HaskellNet.SMTP,253680,0.274
+Simplifier ,Network.HaskellNet.SMTP,22702208,19.68
+Exitification transformation ,Network.HaskellNet.SMTP,22752,1.1e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = True}) ",Network.HaskellNet.SMTP,5670152,3.893
+Common sub-expression ,Network.HaskellNet.SMTP,21352,1.0e-2
+Float inwards ,Network.HaskellNet.SMTP,20248,9.0e-3
+Simplifier ,Network.HaskellNet.SMTP,15392528,14.654
+Demand analysis ,Network.HaskellNet.SMTP,8181152,3.886
+CoreTidy ,Network.HaskellNet.SMTP,2963240,2.201
+CorePrep ,Network.HaskellNet.SMTP,21208,1.7e-2
+CodeGen ,Network.HaskellNet.SMTP,64138736,47.597
+CorePrep ,Network.HaskellNet.SMTP,21208,2.9e-2
+CodeGen ,Network.HaskellNet.SMTP,65162944,42.796

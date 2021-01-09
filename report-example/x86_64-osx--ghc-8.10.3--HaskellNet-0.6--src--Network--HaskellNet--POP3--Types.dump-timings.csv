@@ -1,0 +1,27 @@
+phaseName,phaseModule,phaseAlloc,phaseTime
+Parser ,Network.HaskellNet.POP3.Types,459360,0.25
+Renamer/typechecker ,Network.HaskellNet.POP3.Types,2487088,1.997
+Desugar ,Network.HaskellNet.POP3.Types,319208,0.261
+Simplifier ,Network.HaskellNet.POP3.Types,2801472,1.632
+Specialise ,Network.HaskellNet.POP3.Types,228352,9.9e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = False}) ",Network.HaskellNet.POP3.Types,945656,0.505
+Simplifier ,Network.HaskellNet.POP3.Types,6576928,4.053
+Simplifier ,Network.HaskellNet.POP3.Types,3936648,3.327
+Simplifier ,Network.HaskellNet.POP3.Types,1508696,0.757
+Float inwards ,Network.HaskellNet.POP3.Types,22040,7.0e-3
+Called arity analysis ,Network.HaskellNet.POP3.Types,23600,1.2e-2
+Simplifier ,Network.HaskellNet.POP3.Types,2031320,0.99
+Demand analysis ,Network.HaskellNet.POP3.Types,972024,0.328
+Worker Wrapper binds ,Network.HaskellNet.POP3.Types,84160,9.0e-2
+Simplifier ,Network.HaskellNet.POP3.Types,4427712,2.927
+Exitification transformation ,Network.HaskellNet.POP3.Types,24544,1.4e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = True}) ",Network.HaskellNet.POP3.Types,873224,0.425
+Common sub-expression ,Network.HaskellNet.POP3.Types,23144,9.0e-3
+Float inwards ,Network.HaskellNet.POP3.Types,22040,1.4e-2
+Simplifier ,Network.HaskellNet.POP3.Types,4816880,3.472
+Demand analysis ,Network.HaskellNet.POP3.Types,938928,0.321
+CoreTidy ,Network.HaskellNet.POP3.Types,890704,0.5
+CorePrep ,Network.HaskellNet.POP3.Types,23000,1.4e-2
+CodeGen ,Network.HaskellNet.POP3.Types,18481096,12.698
+CorePrep ,Network.HaskellNet.POP3.Types,23000,2.3e-2
+CodeGen ,Network.HaskellNet.POP3.Types,18390064,13.773

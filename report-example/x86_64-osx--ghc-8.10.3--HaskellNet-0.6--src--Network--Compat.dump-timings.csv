@@ -1,0 +1,27 @@
+phaseName,phaseModule,phaseAlloc,phaseTime
+Parser ,Network.Compat,1388192,0.586
+Renamer/typechecker ,Network.Compat,51688152,78.157
+Desugar ,Network.Compat,4858880,5.456
+Simplifier ,Network.Compat,21902944,53.916
+Specialise ,Network.Compat,306728,0.244
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = False}) ",Network.Compat,1443296,1.443
+Simplifier ,Network.Compat,15904584,18.25
+Simplifier ,Network.Compat,4079432,3.019
+Simplifier ,Network.Compat,1854256,1.305
+Float inwards ,Network.Compat,17560,7.0e-3
+Called arity analysis ,Network.Compat,19120,1.0e-2
+Simplifier ,Network.Compat,2554808,3.145
+Demand analysis ,Network.Compat,1964224,1.273
+Worker Wrapper binds ,Network.Compat,86064,0.129
+Simplifier ,Network.Compat,4186464,3.047
+Exitification transformation ,Network.Compat,20080,1.1e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = True}) ",Network.Compat,1801664,1.248
+Common sub-expression ,Network.Compat,18664,8.0e-3
+Float inwards ,Network.Compat,17560,9.0e-3
+Simplifier ,Network.Compat,4939848,5.137
+Demand analysis ,Network.Compat,1916800,1.049
+CoreTidy ,Network.Compat,1392408,1.816
+CorePrep ,Network.Compat,18536,2.4e-2
+CodeGen ,Network.Compat,24696760,19.994
+CorePrep ,Network.Compat,18536,2.4e-2
+CodeGen ,Network.Compat,25172784,18.772

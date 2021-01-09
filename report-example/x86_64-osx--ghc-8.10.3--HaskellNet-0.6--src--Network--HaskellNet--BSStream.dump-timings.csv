@@ -1,0 +1,27 @@
+phaseName,phaseModule,phaseAlloc,phaseTime
+Parser ,Network.HaskellNet.BSStream,988952,0.376
+Renamer/typechecker ,Network.HaskellNet.BSStream,4061928,3.191
+Desugar ,Network.HaskellNet.BSStream,1021704,0.648
+Simplifier ,Network.HaskellNet.BSStream,9783160,6.852
+Specialise ,Network.HaskellNet.BSStream,180912,9.1e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = False}) ",Network.HaskellNet.BSStream,623600,0.395
+Simplifier ,Network.HaskellNet.BSStream,3189104,1.805
+Simplifier ,Network.HaskellNet.BSStream,982208,0.53
+Simplifier ,Network.HaskellNet.BSStream,982208,0.515
+Float inwards ,Network.HaskellNet.BSStream,21448,7.0e-3
+Called arity analysis ,Network.HaskellNet.BSStream,23008,1.1e-2
+Simplifier ,Network.HaskellNet.BSStream,1291544,0.656
+Demand analysis ,Network.HaskellNet.BSStream,984992,0.405
+Worker Wrapper binds ,Network.HaskellNet.BSStream,62528,6.4e-2
+Simplifier ,Network.HaskellNet.BSStream,4536392,2.527
+Exitification transformation ,Network.HaskellNet.BSStream,23936,1.5e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = True}) ",Network.HaskellNet.BSStream,764304,0.561
+Common sub-expression ,Network.HaskellNet.BSStream,22552,1.0e-2
+Float inwards ,Network.HaskellNet.BSStream,21448,1.4e-2
+Simplifier ,Network.HaskellNet.BSStream,3359232,4.17
+Demand analysis ,Network.HaskellNet.BSStream,1099512,0.472
+CoreTidy ,Network.HaskellNet.BSStream,645912,0.423
+CorePrep ,Network.HaskellNet.BSStream,22408,1.6e-2
+CodeGen ,Network.HaskellNet.BSStream,12528224,9.835
+CorePrep ,Network.HaskellNet.BSStream,22408,2.9e-2
+CodeGen ,Network.HaskellNet.BSStream,12610456,8.448

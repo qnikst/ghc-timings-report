@@ -1,0 +1,27 @@
+phaseName,phaseModule,phaseAlloc,phaseTime
+Parser ,Network.HaskellNet.IMAP.Types,2507632,0.88
+Renamer/typechecker ,Network.HaskellNet.IMAP.Types,16941528,12.051
+Desugar ,Network.HaskellNet.IMAP.Types,3290824,2.53
+Simplifier ,Network.HaskellNet.IMAP.Types,59611200,46.22
+Specialise ,Network.HaskellNet.IMAP.Types,2350368,1.201
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = False}) ",Network.HaskellNet.IMAP.Types,10261664,6.742
+Simplifier ,Network.HaskellNet.IMAP.Types,62422736,51.403
+Simplifier ,Network.HaskellNet.IMAP.Types,60653104,41.25
+Simplifier ,Network.HaskellNet.IMAP.Types,12676264,7.758
+Float inwards ,Network.HaskellNet.IMAP.Types,22040,1.0e-2
+Called arity analysis ,Network.HaskellNet.IMAP.Types,23600,1.2e-2
+Simplifier ,Network.HaskellNet.IMAP.Types,17168936,12.594
+Demand analysis ,Network.HaskellNet.IMAP.Types,10024448,4.633
+Worker Wrapper binds ,Network.HaskellNet.IMAP.Types,472912,0.516
+Simplifier ,Network.HaskellNet.IMAP.Types,29439768,17.901
+Exitification transformation ,Network.HaskellNet.IMAP.Types,24544,2.0e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = True}) ",Network.HaskellNet.IMAP.Types,9732712,5.372
+Common sub-expression ,Network.HaskellNet.IMAP.Types,23144,1.3e-2
+Float inwards ,Network.HaskellNet.IMAP.Types,22040,9.0e-3
+Simplifier ,Network.HaskellNet.IMAP.Types,34938504,23.603
+Demand analysis ,Network.HaskellNet.IMAP.Types,10403248,9.755
+CoreTidy ,Network.HaskellNet.IMAP.Types,6331192,3.954
+CorePrep ,Network.HaskellNet.IMAP.Types,23000,1.8e-2
+CodeGen ,Network.HaskellNet.IMAP.Types,224004248,148.377
+CorePrep ,Network.HaskellNet.IMAP.Types,23000,2.9e-2
+CodeGen ,Network.HaskellNet.IMAP.Types,227126336,147.225
