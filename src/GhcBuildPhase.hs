@@ -7,7 +7,7 @@ module GhcBuildPhase
 
 import Data.Aeson
 import Data.Csv
-import Data.Functor
+import Data.Function
 import Data.Maybe
 import qualified Data.Text as T
 import GHC.Generics
@@ -36,12 +36,12 @@ data Phase = Phase
 --
 -- Doesn't report errors.
 parsePhases :: T.Text -> [Phase]
-parsePhases input = T.lines input <&> parseStep where
+parsePhases input = T.lines input & mapMaybe parseStep where
   parseStep x = case T.span (/='[') x of
     (phaseName, T.drop 1 -> rest1) -> case T.span (/=']') rest1 of
       (phaseModule, T.drop 2 -> rest2) -> case T.words rest2 of
         [allocs, time] ->
           let phaseAlloc = read $ T.unpack $ fromJust $  T.stripPrefix "alloc=" allocs -- !!!
               phaseTime = read $ T.unpack $ fromJust $  T.stripPrefix "time=" time -- !!!
-          in Phase{..}
-        _ -> error $ "illegal line: " <> T.unpack rest2
+          in Just Phase{..}
+        _ -> Nothing -- error $ "illegal line: " <> T.unpack rest2
