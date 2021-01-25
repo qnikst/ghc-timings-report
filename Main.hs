@@ -48,18 +48,18 @@ main = do
   let ( files_failed,
         files_parsed)
         = partitionEithers $ files <&> \file ->
-            case stripPrefix dir file of
+            case stripPrefix (splitDirectories dir) (splitDirectories file) of
               Nothing -> Left file
-              Just x -> case splitDirectories x of
-                ("/" : "build" : hostOs : ghcVersion : packageName : componentType : subComponent : "build" : modulePath) -> Right GhcFile{..}
-                ("/" : "build" : hostOs : ghcVersion : packageName : "build" : modulePath) ->
+              Just x -> case x of
+                ("build" : hostOs : ghcVersion : packageName : componentType : subComponent : "build" : modulePath) -> Right GhcFile{..}
+                ("build" : hostOs : ghcVersion : packageName : "build" : modulePath) ->
                    let componentType = ""
                        subComponent = ""
                    in Right GhcFile{..}
                 _ -> Left file
 
   unless (Prelude.null files_failed) $ do
-    Prelude.putStrLn "Warning, some files are failed to be parsed"
+    Prelude.putStrLn "Warning, some files failed to be parsed"
     Prelude.print files_failed
 
   
