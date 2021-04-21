@@ -5,6 +5,7 @@ module Report
   , moduleTable
   ) where
 
+import Colonnade
 import qualified Data.Text as T
 import Data.Foldable (for_)
 import Data.List (intercalate)
@@ -12,11 +13,13 @@ import Data.String
 import Data.Text.Lazy.Builder.RealFloat
 import GhcFile
 import GhcBuildPhase
+import Text.Blaze.Colonnade
 import Text.Blaze.Html5 hiding (map, head)
 import qualified Text.Blaze.Html5 as H
 import Text.Blaze.Html5.Attributes hiding (title, rows, accept)
 import qualified Text.Blaze.Html5.Attributes as A
 import System.FilePath
+import TextShow (showt)
 import Prelude hiding (span)
 
 index :: [String] -> Markup -- TODO: use T.Text
@@ -37,7 +40,7 @@ index packages = docTypeHtml $ do
 
 -- | Mark report page per package.
 packageTable :: String -> [T.Text] -> [(GhcFile, Double, [Maybe Double])] -> Markup
-packageTable package_name columns rows = docTypeHtml $ do
+packageTable package_name columns' rows = docTypeHtml $ do
   H.head $ do
     title $ toMarkup $ "GHC timings report: " <> package_name
     H.link ! A.rel "stylesheet"
@@ -45,32 +48,33 @@ packageTable package_name columns rows = docTypeHtml $ do
            ! A.href "./main.css"
   body $ do
     h1 $ fromString package_name
-    p $ do 
+    p $ do
       a ! href "./index.html" $ "index"
     p $ do
       a ! href (fromString $ package_name <> ".csv")
         $ "Download as CSV"
-    table $ do
-      tbody $ do
-        tr $ do
-          th "module name"
-          th "total"
-          for_ columns $ th . toMarkup
-        for_ rows $ \(f@GhcFile{..}, total, cs) ->
-          tr $ do 
-            td ! A.class_ "module" $ 
-               a ! href (fromString $ rebuildPlainPath f <> ".html")
-                 $ toMarkup $ joinPath modulePath
-            (td `lev` total ! A.class_ "number" ) $ toMarkup $ formatRealFloat Fixed (Just 2) total
-            for_ cs $ \case 
-              Nothing -> td mempty
-              Just v -> (td `lev` v ! A.class_ "number") . toMarkup . formatRealFloat Fixed (Just 2) $ v
+    encodeCellTable
+      mempty
+      (headed ((textCell "module name"){ cellAttribute = A.scope "col"})
+              (\(f@GhcFile{..},_,_) -> (htmlCell
+                  $ a ! href (fromString $ rebuildPlainPath f <> ".html")
+                  $ toMarkup $ joinPath modulePath)
+                  { cellAttribute = A.class_ "module"}
+              )
+       <> headed ((textCell "total"){ cellAttribute = A.scope "col"})
+           (\(_,total,_) -> (htmlCell $ toMarkup $ formatRealFloat Fixed (Just 2) total)
+              { cellAttribute = lev total <> A.class_ "number"} )
+       <> mconcat [ headed ((textCell c){ cellAttribute = A.scope "col"})
+                     (\(_,_,z) -> (htmlCell $ maybe mempty (toMarkup . formatRealFloat Fixed (Just 2)) $ z!!j)
+                        { cellAttribute = (maybe mempty lev) (z!!j) <> A.class_ "number"} )
+                  | (j,c) <- zip [0..] columns'])
+      rows
   where
-    lev t v | v >= 10000 = t ! A.class_ "lev3"
-            | v >= 5000 = t ! A.class_ "lev2"
-            | v >= 1000 = t ! A.class_ "lev1"
-            | otherwise = t
-    
+    lev v | v >= 10000 = A.class_ "lev3"
+          | v >= 5000 = A.class_ "lev2"
+          | v >= 1000 = A.class_ "lev1"
+          | otherwise = mempty
+
 moduleTable :: GhcFile -> [Phase] -> Markup
 moduleTable f@GhcFile{..} rows = docTypeHtml $ do
   H.head $ do
@@ -84,23 +88,24 @@ moduleTable f@GhcFile{..} rows = docTypeHtml $ do
       a ! href "./index.html" $ "index"
       H.span " < "
       a ! href (fromString $ "./" <> packageName <> ".html") $ toMarkup packageName
-    p $ do 
+    p $ do
       a ! href (fromString $ rebuildPlainPath f <> ".csv")
         $ "Download as CSV"
-    table $ do
-      tbody $ do
-        tr $ do
-          th ! colspan "2" $ "Phase name"
-          th "Alloc"
-          th "Time"
-        for_ (zip [1..] rows) $ \(n, Phase{..}) ->
-          tr $ do 
-            td ! A.class_ "module" ! A.style "width:5%" $ toMarkup (n :: Int)
-            td ! A.class_ "module" $ toMarkup phaseName
-            td ! A.class_ "number" $ toMarkup phaseAlloc
-            (td `lev` phaseTime ! A.class_ "number") $ toMarkup $ formatRealFloat Fixed (Just 2) phaseTime
+    encodeCellTable
+      mempty
+      (headed (textCell "number")
+              (\(n,_) -> textCell (showt n))
+       <> headed (textCell "Phase name")
+                (\(_,Phase{..}) -> textCell phaseName)
+       <> headed ((textCell "Alloc"))
+           (\(_,Phase{..}) -> textCell $ showt phaseAlloc)
+       <> headed (textCell "Time")
+                 (\(_,Phase{..}) ->
+                   (htmlCell $ toMarkup $ formatRealFloat Fixed (Just 2) phaseTime)
+                        { cellAttribute = lev phaseTime <> A.class_ "number"} ))
+       $ zip [(1::Int)..] rows
   where
-    lev t v | v >= 10000 = t ! A.class_ "lev3"
-            | v >= 5000 = t ! A.class_ "lev2"
-            | v >= 1000 = t ! A.class_ "lev1"
-            | otherwise = t
+    lev v | v >= 10000 = A.class_ "lev3"
+          | v >= 5000 = A.class_ "lev2"
+          | v >= 1000 = A.class_ "lev1"
+          | otherwise = mempty

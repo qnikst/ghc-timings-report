@@ -17,6 +17,8 @@ data GhcFile = GhcFile
   { hostOs :: String -- ^ Host
   , ghcVersion :: String
   , packageName :: String
+  , componentType :: String
+  , subComponent :: String
   , modulePath :: [String]
   , srcFilePath :: String
   }

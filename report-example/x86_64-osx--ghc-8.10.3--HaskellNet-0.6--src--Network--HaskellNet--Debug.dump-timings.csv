@@ -1,0 +1,27 @@
+phaseName,phaseModule,phaseAlloc,phaseTime
+Parser ,Network.HaskellNet.Debug,831688,0.518
+Renamer/typechecker ,Network.HaskellNet.Debug,2894800,1.994
+Desugar ,Network.HaskellNet.Debug,384984,0.371
+Simplifier ,Network.HaskellNet.Debug,3186616,2.147
+Specialise ,Network.HaskellNet.Debug,153712,7.8e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = False}) ",Network.HaskellNet.Debug,726328,0.487
+Simplifier ,Network.HaskellNet.Debug,3528160,2.47
+Simplifier ,Network.HaskellNet.Debug,2085064,1.553
+Simplifier ,Network.HaskellNet.Debug,852504,0.616
+Float inwards ,Network.HaskellNet.Debug,20536,1.2e-2
+Called arity analysis ,Network.HaskellNet.Debug,22096,1.4e-2
+Simplifier ,Network.HaskellNet.Debug,1048912,0.611
+Demand analysis ,Network.HaskellNet.Debug,850144,0.458
+Worker Wrapper binds ,Network.HaskellNet.Debug,79936,8.7e-2
+Simplifier ,Network.HaskellNet.Debug,3740784,2.072
+Exitification transformation ,Network.HaskellNet.Debug,23056,9.0e-3
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = True}) ",Network.HaskellNet.Debug,915040,0.563
+Common sub-expression ,Network.HaskellNet.Debug,21640,8.0e-3
+Float inwards ,Network.HaskellNet.Debug,20536,1.1e-2
+Simplifier ,Network.HaskellNet.Debug,2692904,1.628
+Demand analysis ,Network.HaskellNet.Debug,1068112,0.474
+CoreTidy ,Network.HaskellNet.Debug,492320,0.312
+CorePrep ,Network.HaskellNet.Debug,21528,1.6e-2
+CodeGen ,Network.HaskellNet.Debug,11638208,11.042
+CorePrep ,Network.HaskellNet.Debug,21528,2.7e-2
+CodeGen ,Network.HaskellNet.Debug,12051240,8.034

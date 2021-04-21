@@ -1,0 +1,27 @@
+phaseName,phaseModule,phaseAlloc,phaseTime
+Parser ,Network.HaskellNet.Auth,1988968,0.807
+Renamer/typechecker ,Network.HaskellNet.Auth,63581704,71.878
+Desugar ,Network.HaskellNet.Auth,8615696,27.017
+Simplifier ,Network.HaskellNet.Auth,24757352,81.114
+Specialise ,Network.HaskellNet.Auth,632840,0.421
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = False}) ",Network.HaskellNet.Auth,2770528,2.159
+Simplifier ,Network.HaskellNet.Auth,27632008,24.168
+Simplifier ,Network.HaskellNet.Auth,26671680,24.948
+Simplifier ,Network.HaskellNet.Auth,67061296,56.072
+Float inwards ,Network.HaskellNet.Auth,20248,1.2e-2
+Called arity analysis ,Network.HaskellNet.Auth,21808,1.3e-2
+Simplifier ,Network.HaskellNet.Auth,38127304,33.897
+Demand analysis ,Network.HaskellNet.Auth,24801064,13.602
+Worker Wrapper binds ,Network.HaskellNet.Auth,574160,0.463
+Simplifier ,Network.HaskellNet.Auth,50306984,44.264
+Exitification transformation ,Network.HaskellNet.Auth,22752,1.5e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = True}) ",Network.HaskellNet.Auth,13401448,8.365
+Common sub-expression ,Network.HaskellNet.Auth,21352,1.2e-2
+Float inwards ,Network.HaskellNet.Auth,20248,8.0e-3
+Simplifier ,Network.HaskellNet.Auth,30533304,29.651
+Demand analysis ,Network.HaskellNet.Auth,16339128,6.022
+CoreTidy ,Network.HaskellNet.Auth,3077280,5.324
+CorePrep ,Network.HaskellNet.Auth,21208,2.0e-2
+CodeGen ,Network.HaskellNet.Auth,125101600,83.972
+CorePrep ,Network.HaskellNet.Auth,21208,3.1e-2
+CodeGen ,Network.HaskellNet.Auth,126938144,80.561

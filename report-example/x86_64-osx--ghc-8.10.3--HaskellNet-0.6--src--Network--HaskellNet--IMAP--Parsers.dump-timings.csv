@@ -1,0 +1,27 @@
+phaseName,phaseModule,phaseAlloc,phaseTime
+Parser ,Network.HaskellNet.IMAP.Parsers,12344040,3.916
+Renamer/typechecker ,Network.HaskellNet.IMAP.Parsers,48665856,37.876
+Desugar ,Network.HaskellNet.IMAP.Parsers,6680528,5.969
+Simplifier ,Network.HaskellNet.IMAP.Parsers,145970440,122.116
+Specialise ,Network.HaskellNet.IMAP.Parsers,9029072,3.899
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = False}) ",Network.HaskellNet.IMAP.Parsers,26684376,26.253
+Simplifier ,Network.HaskellNet.IMAP.Parsers,375272008,343.209
+Simplifier ,Network.HaskellNet.IMAP.Parsers,317338320,376.592
+Simplifier ,Network.HaskellNet.IMAP.Parsers,415858984,359.58
+Float inwards ,Network.HaskellNet.IMAP.Parsers,22632,7.0e-3
+Called arity analysis ,Network.HaskellNet.IMAP.Parsers,24192,1.1e-2
+Simplifier ,Network.HaskellNet.IMAP.Parsers,359132568,367.765
+Demand analysis ,Network.HaskellNet.IMAP.Parsers,123984952,71.562
+Worker Wrapper binds ,Network.HaskellNet.IMAP.Parsers,3196312,1.988
+Simplifier ,Network.HaskellNet.IMAP.Parsers,474637800,505.26
+Exitification transformation ,Network.HaskellNet.IMAP.Parsers,25136,1.1e-2
+"Float out(FOS {Lam = Just 0, Consts = True, OverSatApps = True}) ",Network.HaskellNet.IMAP.Parsers,107221648,91.178
+Common sub-expression ,Network.HaskellNet.IMAP.Parsers,23736,1.2e-2
+Float inwards ,Network.HaskellNet.IMAP.Parsers,22632,1.0e-2
+Simplifier ,Network.HaskellNet.IMAP.Parsers,242455624,232.928
+Demand analysis ,Network.HaskellNet.IMAP.Parsers,112591992,64.498
+CoreTidy ,Network.HaskellNet.IMAP.Parsers,30742944,22.67
+CorePrep ,Network.HaskellNet.IMAP.Parsers,23592,2.0e-2
+CodeGen ,Network.HaskellNet.IMAP.Parsers,1531622504,987.292
+CorePrep ,Network.HaskellNet.IMAP.Parsers,23592,2.4e-2
+CodeGen ,Network.HaskellNet.IMAP.Parsers,1560285240,877.803

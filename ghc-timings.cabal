@@ -1,10 +1,10 @@
 cabal-version:       >=1.10
-name:                ghc-timings-report
-version:             0.1.0.0
 synopsis:            Get statistical report about how long files were compiled.
 description:         Simple package that can gather information about compilation
                      time for later analysis.
 bug-reports:         https://github.com/qnikst/ghc-timings-report
+name:                ghc-timings
+version:             0.1
 license:             MIT
 author:              Alexander Vershilov
 maintainer:          alexander.vershilov@gmail.com
@@ -32,10 +32,12 @@ executable ghc-timings
   build-depends:       base >=4.13 && <4.16,
                        aeson,
                        binary,
+                       blaze-colonnade,
                        blaze-html,
                        blaze-markup,
                        bytestring,
                        cassava,
+                       colonnade,
                        conduit >= 1.3,
                        containers,
                        directory,

@@ -51,13 +51,17 @@ main = do
             case stripPrefix dir file of
               Nothing -> Left file
               Just x -> case splitDirectories x of
-                ("/": "build": hostOs: ghcVersion: packageName: "build": modulePath) ->
+                ("/" : "build" : hostOs : ghcVersion : packageName : componentType : subComponent : "build" : modulePath) ->
                   let srcFilePath = file
+                      componentType = ""
+                      subComponent = ""
                   in Right GhcFile{..}
                 ("/": "dist": hostOs : _cabalVersion : "build": modulePath) ->
                   -- FIXME: should be retrieved from stack somehow
                   let ghcVersion = "<GHC version>"
                       packageName = "<Package name>"
+                      componentType = ""
+                      subComponent = ""
                       srcFilePath = file
                   in Right GhcFile{..}
                 _ -> Left file
