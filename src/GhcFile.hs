@@ -8,7 +8,6 @@ module GhcFile
 import Data.Aeson
 import Data.List
 import GHC.Generics (Generic)
-import System.FilePath
 
 -- | Representation of the file in the filesystem structure.
 -- 
@@ -19,6 +18,7 @@ data GhcFile = GhcFile
   , ghcVersion :: String
   , packageName :: String
   , modulePath :: [String]
+  , srcFilePath :: String
   }
   deriving (Show, Generic)
   deriving (Eq, Ord)
@@ -28,8 +28,7 @@ data GhcFile = GhcFile
 --
 -- It looks terrible, seems a wrong abstraction is here.
 rebuildFilePath :: FilePath -> GhcFile -> FilePath
-rebuildFilePath base GhcFile{..} =
-  base </> "build" </> hostOs </> ghcVersion </> packageName </> "build" </> joinPath modulePath
+rebuildFilePath _base GhcFile{..} = srcFilePath
 
 -- | Convert 'GhcFile' into plain filename that we use in our report storage.
 rebuildPlainPath :: GhcFile -> FilePath
