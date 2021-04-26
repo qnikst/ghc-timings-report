@@ -47,16 +47,14 @@ main = do
 
   let ( files_failed,
         files_parsed)
-        = partitionEithers $ files <&> \file ->
-            case stripPrefix dir file of
-              Nothing -> Left file
+        = partitionEithers $ files <&> \srcFilePath ->
+            case stripPrefix dir srcFilePath of
+              Nothing -> Left srcFilePath
               Just x -> case splitDirectories x of
                 ("/" : "build" : hostOs : ghcVersion : packageName : componentType : subComponent : "build" : modulePath) ->
-                  let srcFilePath = file
-                  in Right GhcFile{..}
+                  Right GhcFile{..}
                 ("/" : "build" : hostOs : ghcVersion : packageName : "build" : modulePath) ->
-                  let srcFilePath = file
-                      componentType = ""
+                  let componentType = ""
                       subComponent = ""
                   in Right GhcFile{..}
                 ("/": "dist": hostOs : _cabalVersion : "build": modulePath) ->
@@ -65,9 +63,8 @@ main = do
                       packageName = "<Package name>"
                       componentType = ""
                       subComponent = ""
-                      srcFilePath = file
                   in Right GhcFile{..}
-                _ -> Left file
+                _ -> Left srcFilePath
 
   unless (Prelude.null files_failed) $ do
     Prelude.putStrLn "Warning, some files are failed to be parsed"
@@ -76,7 +73,7 @@ main = do
   
   -- Output all files in json form for later analysis.
   results <- for files_parsed $ \f -> do
-    steps <- fmap parsePhases $ T.readFile (rebuildFilePath dir f)
+    steps <- fmap parsePhases $ T.readFile (rebuildFilePath f)
     encodeFile (output </> rebuildPlainPath f <.> "json") steps
     let bs = encodeDefaultOrderedByName steps
     BSL.writeFile (output </> rebuildPlainPath f <.> "csv") bs

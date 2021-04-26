@@ -29,8 +29,8 @@ data GhcFile = GhcFile
 -- | Build path to the file in the file system based on prefix and 'GhcFile'
 --
 -- It looks terrible, seems a wrong abstraction is here.
-rebuildFilePath :: FilePath -> GhcFile -> FilePath
-rebuildFilePath _base GhcFile{..} = srcFilePath
+rebuildFilePath :: GhcFile -> FilePath
+rebuildFilePath GhcFile{..} = srcFilePath
 
 -- | Convert 'GhcFile' into plain filename that we use in our report storage.
 rebuildPlainPath :: GhcFile -> FilePath
