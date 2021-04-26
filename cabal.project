@@ -1,3 +1,4 @@
 packages: .
+allow-newer: colonnade:profunctors
 optional-packages:
    vendor/**/*.cabal
