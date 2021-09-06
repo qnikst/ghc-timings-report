@@ -53,7 +53,13 @@ main = do
               Just x -> case x of
                 ("build" : hostOs : ghcVersion : packageName : componentType : subComponent : "build" : modulePath) ->
                   Right GhcFile{..}
+                ("build" : hostOs : ghcVersion : packageName : componentType : subComponent : "noopt" : "build" : modulePath) ->
+                  Right GhcFile{..}
                 ("build" : hostOs : ghcVersion : packageName : "build" : modulePath) ->
+                  let componentType = ""
+                      subComponent = ""
+                  in Right GhcFile{..}
+                ("build" : hostOs : ghcVersion : packageName : "noopt" : "build" : modulePath) ->
                   let componentType = ""
                       subComponent = ""
                   in Right GhcFile{..}
