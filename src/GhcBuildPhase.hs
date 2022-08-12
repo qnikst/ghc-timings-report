@@ -21,9 +21,9 @@ data Phase = Phase
   , phaseAlloc :: Int
   , phaseTime :: Double
   }
-  deriving stock (Generic)
+  deriving stock (Generic, Eq, Show)
   deriving anyclass (ToJSON, FromJSON)
-  deriving anyclass (ToNamedRecord, DefaultOrdered)
+  deriving anyclass (ToNamedRecord, DefaultOrdered, FromNamedRecord)
   deriving TextShow via (FromGeneric Phase)
 
 -- | Parse .ghc-timings file timings file and get list of phases.

@@ -15,8 +15,10 @@ extra-source-files:  CHANGELOG.md
 
 executable ghc-timings
   main-is:             Main.hs
-  other-modules:       GhcFile
+  other-modules:       Compare
+                       GhcFile
                        GhcBuildPhase
+                       Generate
                        Report
   hs-source-dirs:      src
                        .
@@ -43,6 +45,8 @@ executable ghc-timings
                        directory,
                        resourcet,
                        filepath,
+                       optparse-applicative,
+                       process,
                        text,
                        text-show,
                        vector
