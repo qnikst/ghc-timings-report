@@ -385,6 +385,7 @@ renderModules, renderPackage :: V.Vector ModuleReportRow -> IO ()
 renderModules rows = do
   let output = renderRow <$> V.toList rows
   Prelude.mapM_ buildPlot output
+  removeFile "module.template.gnuplot"
   where
     opts = Csv.defaultEncodeOptions { Csv.encDelimiter = fromIntegral (ord '\t') }
     renderRow row = 
@@ -411,11 +412,13 @@ renderModules rows = do
       T.writeFile plotSettingsFile plotSettingsContents
       BSL.writeFile plotDataFile $ Builder.toLazyByteString bs
       createPlot plotSettingsFile
+      removeFile plotSettingsFile
     createPlot plotFile = callProcess "gnuplot" [plotFile]
 
 renderPackage rows = do
   let output = renderRow <$> V.toList rows
   buildPlot "package.svg" output
+  mapM_ removeFile [ "package.template.gnuplot", "package.gnuplot" ]
   where
     opts = Csv.defaultEncodeOptions { Csv.encDelimiter = fromIntegral (ord '\t') }
     renderRow row = Csv.encodeRecordWith opts
