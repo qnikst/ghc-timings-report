@@ -212,7 +212,7 @@ mergeModulesReports modulesBefore modulesAfter =
           goTransform Nothing Nothing = V.empty
           goTransform (Just b) Nothing = V.map (makePhaseReportWith makeBefore) (V.indexed b)
           goTransform Nothing (Just a) = V.map (makePhaseReportWith makeAfter) (V.indexed a)
-          goTransform (Just b) (Just a) = V.fromList
+          goTransform (Just b) (Just a) = V.fromList $ List.reverse
             $ buildWholeSequence (V.toList b) (V.toList a)
 
           makePhaseReportWith make (ix, Phase{..}) = PhaseReport
