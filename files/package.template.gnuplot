@@ -1,6 +1,6 @@
 set datafile separator "\t"
 set terminal svg size 8000,4000
-set output '<OUTPUT_FILE>' 
+set output '<OUTPUT_FILE>'
 set datafile missing ""
 
 set xlabel "ms"

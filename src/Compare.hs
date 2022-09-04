@@ -22,7 +22,7 @@ import qualified Data.Map.Strict as Map
 import qualified Data.Text.IO as T
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import qualified Data.Vector.Mutable as V (write) 
+import qualified Data.Vector.Mutable as V (write)
 import qualified Prelude
 
 import GhcBuildPhase
@@ -51,7 +51,7 @@ runCompare beforeDir afterDir out = do
   withCurrentDirectory out $ do
     renderModules mergedModulesData
     renderPackage mergedModulesData
-  
+
 -- ** Helpers for `compare`
 
 checkDirectoriesExistence :: FilePath -> FilePath -> IO ()
@@ -144,7 +144,7 @@ mergeModulesReports modulesBefore modulesAfter =
                         }
                     where
                       ix = moduleMap Map.! name
-                        
+
               in List.foldl' update vec bs
           go vec [] as
             = let update v (moduleName, moduleData)
@@ -160,7 +160,7 @@ mergeModulesReports modulesBefore modulesAfter =
                       ix = moduleMap Map.! name
               in List.foldl' update vec as
           go vec oldB@(b : bs) oldA@(a : as) = case fst b `compare` fst a of
-            EQ -> let update v moduleName moduleDataBefore moduleDataAfter 
+            EQ -> let update v moduleName moduleDataBefore moduleDataAfter
                         = V.modify
                           (modifier moduleName moduleDataBefore moduleDataAfter)
                           v
@@ -174,7 +174,7 @@ mergeModulesReports modulesBefore modulesAfter =
                         where
                           ix = moduleMap Map.! name
                   in go (update vec (fst b) (snd b) (snd a)) bs as
-            LT -> let update v make (moduleName, moduleData) 
+            LT -> let update v make (moduleName, moduleData)
                         = V.modify (modifier make moduleName moduleData) v
                       modifier make name data' v
                         = V.write v ix
@@ -186,7 +186,7 @@ mergeModulesReports modulesBefore modulesAfter =
                         where
                           ix = moduleMap Map.! name
                   in go (update vec makeBefore b) bs oldA
-            GT -> let update v make (moduleName, moduleData) 
+            GT -> let update v make (moduleName, moduleData)
                         = V.modify (modifier make moduleName moduleData) v
                       modifier make name data' v
                         = V.write v ix
@@ -388,7 +388,7 @@ renderModules rows = do
   removeFile "module.template.gnuplot"
   where
     opts = Csv.defaultEncodeOptions { Csv.encDelimiter = fromIntegral (ord '\t') }
-    renderRow row = 
+    renderRow row =
       let content = mconcat
             (Prelude.map (Csv.encodeRecordWith opts)
              [ ( phaseReportPhaseName pr

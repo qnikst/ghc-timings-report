@@ -30,11 +30,11 @@ cabal v2-build
 ```
 
 At this point I don't suggest you to install the tool because
-at such an early stage it will likely require manual configuration 
+at such an early stage it will likely require manual configuration
 a lot.
 
 3. Configure your project in order to generate timing files:
- 
+
 ```bash
 cabal v2-configure --ghc-options=-ddump-timings --ghc-options=-ddump-to-file
 ```

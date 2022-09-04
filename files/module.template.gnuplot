@@ -19,5 +19,5 @@ set grid y
 set style data lines
 plot '<INPUT_FILE>' using ($0-0.2):3 index 0 with boxes title "before", \
      '' using ($0+0.2):4 index 0 with boxes title "after", \
-     '' using ($0):xtic(1) lw 0 notitle  
+     '' using ($0):xtic(1) lw 0 notitle
 
