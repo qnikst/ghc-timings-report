@@ -15,6 +15,7 @@ main = join $ execParser (info (helper <*> opts) idm)
       command "generate" (info (helper <*> generate) (progDesc "Generate timings report"))
       <> command "compare" (info (helper <*> compareReports) (progDesc "Compare two reports"))
 
+-- | Gather arguments for report generation.
 generate :: Options.Parser (IO ())
 generate = runGenerate
   <$> strOption
@@ -23,6 +24,8 @@ generate = runGenerate
       <> metavar "PROJECT_DIR"
       <> help "Haskell project directory"
     )
+
+-- | Gather arguments for comparing reports.
 compareReports :: Options.Parser (IO ())
 compareReports = runCompare
   <$> strOption
