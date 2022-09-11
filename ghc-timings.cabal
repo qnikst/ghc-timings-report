@@ -1,4 +1,4 @@
-cabal-version:       >=1.10
+cabal-version:       2.0
 synopsis:            Get statistical report about how long files were compiled.
 description:         Simple package that can gather information about compilation
                      time for later analysis.
@@ -12,14 +12,18 @@ maintainer:          alexander.vershilov@gmail.com
 -- category:
 build-type:          Simple
 extra-source-files:  CHANGELOG.md
+data-files:          files/*.gnuplot
+                     files/*.css
 
 executable ghc-timings
   main-is:             Main.hs
+  autogen-modules:     Paths_ghc_timings
   other-modules:       Compare
                        GhcFile
                        GhcBuildPhase
                        Generate
                        Report
+                       Paths_ghc_timings
   hs-source-dirs:      src
                        .
   default-extensions:  DerivingStrategies
@@ -49,6 +53,7 @@ executable ghc-timings
                        process,
                        text,
                        text-show,
+                       these,
                        vector
   ghc-options: -Wall -Werror
   default-language:    Haskell2010

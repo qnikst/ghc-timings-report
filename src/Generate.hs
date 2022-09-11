@@ -100,7 +100,7 @@ runGenerate dir = do
                                     ]
                , then sortWith by (Down total)
                ]
-    mkHtmlFile ("./tmp/" <> package <> ".html")
+    mkHtmlFile (output <> "/" <> package <> ".html")
       $ Report.packageTable package headers rows
     let bs = Csv.encodeHeader (V.fromList ("module": "total": Prelude.map T.encodeUtf8 headers))
              <> mconcat (Prelude.map Csv.encodeRecord
@@ -111,10 +111,11 @@ runGenerate dir = do
        $ Builder.toLazyByteString bs
   -- Prelude.print byPackage
   -- Report.
-  mkHtmlFile "./tmp/index.html"
+  mkHtmlFile (output <> "/index.html")
     $ Report.index $ Map.keys stats_by_package
-  copyFile "files/main.css" "./tmp/main.css" -- TODO use data files
+  copyFile "files/main.css" (output <> "/main.css") -- TODO use data files
   where
+    output :: IsString a => a
     output = "./tmp"
 
 -- ** Helpers
