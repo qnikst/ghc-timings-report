@@ -30,11 +30,11 @@ cabal v2-build
 ```
 
 At this point I don't suggest you to install the tool because
-at such an early stage it will likely require manual configuration 
+at such an early stage it will likely require manual configuration
 a lot.
 
 3. Configure your project in order to generate timing files:
- 
+
 ```bash
 cabal v2-configure --ghc-options=-ddump-timings --ghc-options=-ddump-to-file
 ```
@@ -45,7 +45,7 @@ to store those reports to files.
 4. Running:
 
 ```bash
-cabal v2-run ghc-timings /Users/qnikst/workspace/another-project/dist-newstyle
+cabal v2-run ghc-timings generate -i /Users/qnikst/workspace/another-project/dist-newstyle
 ```
 
 In the `tmp` folder you'll get all the reports.
@@ -82,6 +82,21 @@ for module and total time for each phase. If you import `<package-version>.csv` 
 package that works with tables like numbers, you'll see something like this:
 
 ![screen1](https://github.com/qnikst/ghc-timings-report/blob/master/screenshot1.png?raw=true)
+
+
+# Compare
+
+**Prerequisites**: you need to have `gnuplot` executable on your `$PATH` to use it.
+
+With following `compare` command you may actually compare results of two different builds.
+
+```bash
+cabal v2-run ghc-timings compare -b ./before -a ./after -o output_dir
+```
+
+It will produce a bunch of plots with package/project module names and `.svg` extension and one more `package.svg` with a summary.
+
+On the plot you can observe comparison between build times from two build runs per each phase (in `<module>.svg`) or per each module (in `package.svg`).
 
 
 # Project ideology.
