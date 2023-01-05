@@ -7,32 +7,34 @@ module Compare
   ( runCompare
   ) where
 
-import Control.Monad
 import Control.Exception
+import Control.Monad
 import Data.Char (ord)
 import Data.Csv as Csv
 import Data.Csv.Builder as Csv
+import Data.Foldable
 import Data.Function
 import Data.Functor
-import Data.Foldable
-import Data.Traversable
-import Data.These
-import Data.These.Combinators
 import Data.List
 import Data.Maybe as M
+import Data.These
+import Data.These.Combinators
+import Data.Traversable
 import Prelude hiding (mapM_, print)
 import System.Directory
+import System.Environment
 import System.FilePath
 import System.Process
+import System.IO.Unsafe
 
 
-import qualified Data.ByteString.Lazy as BSL
 import qualified Data.Binary.Builder as Builder
+import qualified Data.ByteString.Lazy as BSL
 import qualified Data.List as List
-import qualified Data.Map.Strict as Map
 import qualified Data.Map.Merge.Strict as Map
-import qualified Data.Text.IO as T
+import qualified Data.Map.Strict as Map
 import qualified Data.Text as T
+import qualified Data.Text.IO as T
 import qualified Data.Vector as V
 import qualified Prelude
 
@@ -56,8 +58,18 @@ pattern TITLE = "<TITLE>"
 pattern GNUPLOT_CMD :: String
 pattern GNUPLOT_CMD = "gnuplot"
 
+pattern DEBUG_ENV :: String
+pattern DEBUG_ENV = "DEBUG"
+
+-- | A helper function that allows instead of writing comments emit an output.
+--
+-- Actually it's just a less generic Debug.Trace.traceM.
 explain :: String -> IO ()
-explain _ = pure ()
+{-# NOINLINE explain #-}
+explain = unsafePerformIO $ do
+  lookupEnv DEBUG_ENV >>= \case
+    Nothing -> pure \_ -> pure ()
+    Just{}  -> pure \s -> putStrLn $ "Debug: " <> s
 
 runCompare :: FilePath -> FilePath -> FilePath -> IO ()
 runCompare beforeDir afterDir out = do
